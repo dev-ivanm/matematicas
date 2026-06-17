@@ -6,7 +6,7 @@
     <title>¡Aprendo Matemáticas!</title>
     <style>
         body {
-            background-color: #f0f9ff;
+            background-color: #1a1a2e;
             font-family: 'Comic Sans MS', sans-serif;
             display: flex;
             justify-content: center;
@@ -17,16 +17,16 @@
         }
 
         .container-box {
-            background-color: white;
+            background-color: #16213e;
             width: 100%;
             max-width: 450px;
             border-radius: 30px;
             padding: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             text-align: center;
         }
 
-        h1 { color: #4f46e5; margin-top: 0; }
+        h1 { color: #4ecca3; margin-top: 0; }
 
         .stats-area {
             display: flex;
@@ -36,14 +36,14 @@
             margin-bottom: 20px;
         }
 
-        #score { font-size: 1.2rem; font-weight: bold; color: #4b5563; }
+        #score { font-size: 1.2rem; font-weight: bold; color: #e94560; }
 
         #rewards { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; font-size: 1.5rem; min-height: 35px; }
 
-        #question { font-size: 3.5rem; font-weight: 800; color: #1f2937; margin-bottom: 20px; }
+        #question { font-size: 3.5rem; font-weight: 800; color: #ffffff; margin-bottom: 20px; }
 
         #visual-aid {
-            background-color: #f9fafb;
+            background-color: #0f3460;
             padding: 15px;
             border-radius: 20px;
             display: flex;
@@ -79,10 +79,10 @@
 
         button:hover { transform: scale(1.05); }
 
-        #btn0 { background-color: #dbeafe; border-color: #bfdbfe; color: #1e40af; }
-        #btn1 { background-color: #dcfce7; border-color: #bbf7d0; color: #166534; }
-        #btn2 { background-color: #fef9c3; border-color: #fef08a; color: #854d0e; }
-        #btn3 { background-color: #fce7f3; border-color: #fbcfe8; color: #9d174d; }
+        #btn0 { background-color: #0f3460; border-color: #4ecca3; color: #ffffff; }
+        #btn1 { background-color: #0f3460; border-color: #4ecca3; color: #ffffff; }
+        #btn2 { background-color: #0f3460; border-color: #4ecca3; color: #ffffff; }
+        #btn3 { background-color: #0f3460; border-color: #4ecca3; color: #ffffff; }
     </style>
 </head>
 <body>
@@ -117,11 +117,11 @@
             container.innerHTML = '';
             
             for(let i=0; i<a; i++) {
-                container.innerHTML += `<div class="circle" style="background-color: #60a5fa;"></div>`;
+                container.innerHTML += `<div class="circle" style="background-color: #4ecca3;"></div>`;
             }
-            container.innerHTML += `<span style="margin: 0 10px; font-weight: bold; color: #9ca3af;">${isAddition ? '+' : '-'}</span>`;
+            container.innerHTML += `<span style="margin: 0 10px; font-weight: bold; color: #ffffff;">${isAddition ? '+' : '-'}</span>`;
             for(let i=0; i<b; i++) {
-                container.innerHTML += `<div class="circle" style="background-color: #f472b6;"></div>`;
+                container.innerHTML += `<div class="circle" style="background-color: #e94560;"></div>`;
             }
         }
 
@@ -170,8 +170,8 @@
                     points -= 10;
                     if(rewardContainer.lastChild) rewardContainer.removeChild(rewardContainer.lastChild);
                 }
-                document.body.style.backgroundColor = "#fee2e2";
-                setTimeout(() => document.body.style.backgroundColor = "#f0f9ff", 200);
+                document.body.style.backgroundColor = "#533434";
+                setTimeout(() => document.body.style.backgroundColor = "#1a1a2e", 200);
             }
             document.getElementById('score').innerText = `Puntos: ${points}`;
         }
