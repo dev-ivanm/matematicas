@@ -42,16 +42,9 @@
 
         #question { font-size: 3.5rem; font-weight: 800; color: #ffffff; margin-bottom: 20px; }
 
+        /* Esta sección ahora está oculta al establecer display: none */
         #visual-aid {
-            background-color: #0f3460;
-            padding: 15px;
-            border-radius: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            min-height: 80px;
-            margin-bottom: 20px;
+            display: none;
         }
 
         .circle {
@@ -97,6 +90,7 @@
 
         <div id="question">? + ?</div>
 
+        <!-- El contenedor visual ahora está oculto mediante CSS -->
         <div id="visual-aid"></div>
 
         <div class="grid">
@@ -112,10 +106,11 @@
         let points = 0;
         const rewards = ["⭐", "🍬", "🍭", "🍫", "🧸", "🎈", "🍪", "🍦"];
 
+        /* // Esta función ha sido comentada para que no se ejecute.
+        // Se encargaba de renderizar los círculos de apoyo visual.
         function renderVisuals(a, b, isAddition) {
             const container = document.getElementById('visual-aid');
             container.innerHTML = '';
-            
             for(let i=0; i<a; i++) {
                 container.innerHTML += `<div class="circle" style="background-color: #4ecca3;"></div>`;
             }
@@ -124,6 +119,7 @@
                 container.innerHTML += `<div class="circle" style="background-color: #e94560;"></div>`;
             }
         }
+        */
 
         function generateQuestion() {
             const isAddition = Math.random() > 0.5;
@@ -141,7 +137,7 @@
                 document.getElementById('question').innerText = `${a} - ${b}`;
             }
 
-            renderVisuals(a, b, isAddition);
+            // renderVisuals(a, b, isAddition); // Llamada comentada para desactivar la visualización
 
             const options = [answer];
             while (options.length < 4) {
