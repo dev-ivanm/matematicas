@@ -230,6 +230,7 @@
             margin-bottom: 6px;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
         }
+<<<<<<< HEAD
         #operacionTexto {
             font-size: 1.7rem;
             font-weight: bold;
@@ -244,6 +245,18 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
+=======
+
+        #score { font-size: 1.2rem; font-weight: bold; color: #e94560; }
+
+        #rewards { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; font-size: 1.5rem; min-height: 35px; }
+
+        #question { font-size: 3.5rem; font-weight: 800; color: #ffffff; margin-bottom: 20px; }
+
+        /* Esta sección ahora está oculta al establecer display: none */
+        #visual-aid {
+            display: none;
+>>>>>>> 5aadb4244ac62b6118292133b6fc0b7bea66eb30
         }
         .opcion-boton {
             background: #f5e6d3;
@@ -504,8 +517,13 @@
                 <span><span class="icono">🏷️</span> Nv. <span id="nivelDisplay">1</span></span>
             </div>
 
+<<<<<<< HEAD
             <!-- Camino de 15 casillas -->
             <div id="camino"></div>
+=======
+        <!-- El contenedor visual ahora está oculto mediante CSS -->
+        <div id="visual-aid"></div>
+>>>>>>> 5aadb4244ac62b6118292133b6fc0b7bea66eb30
 
             <!-- Operación con opciones -->
             <div id="operacion">
@@ -537,6 +555,7 @@
         //  JAVASCRIPT PRINCIPAL – MEJORADO: MIXTO, MÁS VARIEDAD, DROPDOWN NIVEL
         // ============================================================
 
+<<<<<<< HEAD
         // ---------- ELEMENTOS DOM ----------
         const inicio = document.getElementById('inicio');
         const juego = document.getElementById('juego');
@@ -587,7 +606,22 @@
             };
             const lim = limites[nivel] || limites[3];
             return { maxNum: lim.maxNum, maxTabla: lim.maxTabla };
+=======
+        /* // Esta función ha sido comentada para que no se ejecute.
+        // Se encargaba de renderizar los círculos de apoyo visual.
+        function renderVisuals(a, b, isAddition) {
+            const container = document.getElementById('visual-aid');
+            container.innerHTML = '';
+            for(let i=0; i<a; i++) {
+                container.innerHTML += `<div class="circle" style="background-color: #4ecca3;"></div>`;
+            }
+            container.innerHTML += `<span style="margin: 0 10px; font-weight: bold; color: #ffffff;">${isAddition ? '+' : '-'}</span>`;
+            for(let i=0; i<b; i++) {
+                container.innerHTML += `<div class="circle" style="background-color: #e94560;"></div>`;
+            }
+>>>>>>> 5aadb4244ac62b6118292133b6fc0b7bea66eb30
         }
+        */
 
         // ---------- GENERAR OPERACIÓN (sin repetición y sin negativos, con mayor variedad) ----------
         function generarOperacion(tipo, nivel) {
@@ -596,6 +630,7 @@
             let intentos = 0;
             let nuevaOperacion = null;
 
+<<<<<<< HEAD
             // Para mixto, elegir aleatoriamente entre los tipos permitidos según nivel
             let tiposDisponibles = [];
             if (tipo === 'mixto') {
@@ -603,6 +638,48 @@
                     tiposDisponibles = ['suma', 'resta'];
                 } else {
                     tiposDisponibles = ['suma', 'resta', 'multiplicacion', 'division'];
+=======
+            if (isAddition) {
+                a = Math.floor(Math.random() * 9) + 1;
+                b = Math.floor(Math.random() * 9) + 1;
+                answer = a + b;
+                document.getElementById('question').innerText = `${a} + ${b}`;
+            } else {
+                a = Math.floor(Math.random() * 9) + 5;
+                b = Math.floor(Math.random() * a);
+                answer = a - b;
+                document.getElementById('question').innerText = `${a} - ${b}`;
+            }
+
+            // renderVisuals(a, b, isAddition); // Llamada comentada para desactivar la visualización
+
+            const options = [answer];
+            while (options.length < 4) {
+                let fake = Math.floor(Math.random() * 20);
+                if (!options.includes(fake)) options.push(fake);
+            }
+
+            options.sort(() => Math.random() - 0.5);
+            correctIndex = options.indexOf(answer);
+
+            for (let i = 0; i < 4; i++) {
+                document.getElementById(`btn${i}`).innerText = options[i];
+            }
+        }
+
+        function checkAnswer(index) {
+            const rewardContainer = document.getElementById('rewards');
+            
+            if (index === correctIndex) {
+                points += 10;
+                const rewardIdx = (Math.floor(points / 10) - 1) % rewards.length;
+                rewardContainer.innerHTML += `<span>${rewards[rewardIdx]}</span>`;
+                generateQuestion();
+            } else {
+                if (points >= 10) {
+                    points -= 10;
+                    if(rewardContainer.lastChild) rewardContainer.removeChild(rewardContainer.lastChild);
+>>>>>>> 5aadb4244ac62b6118292133b6fc0b7bea66eb30
                 }
                 // Elegir un tipo aleatorio
                 const tipoElegido = tiposDisponibles[Math.floor(Math.random() * tiposDisponibles.length)];
