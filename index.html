@@ -3,176 +3,1033 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Aprendo Matemáticas!</title>
+    <title>🍭 Juego Matemático - 15 Niveles</title>
     <style>
+        /* ---------- RESET Y ESTILOS GLOBALES ---------- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
-            background-color: #1a1a2e;
-            font-family: 'Comic Sans MS', sans-serif;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+            background: linear-gradient(145deg, #f9e7b3 0%, #f5d78e 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 6px;
         }
-
-        .container-box {
-            background-color: #16213e;
+        .container {
+            background: rgba(255, 247, 220, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 30px 30px 25px 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 2px 6px rgba(255, 255, 200, 0.6);
+            padding: 10px 14px 14px;
+            max-width: 750px;
             width: 100%;
-            max-width: 450px;
-            border-radius: 30px;
-            padding: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 3px solid #ffcf8a;
+            transition: 0.3s;
+        }
+        h1 {
             text-align: center;
+            font-size: 1.8rem;
+            color: #7a3b1e;
+            text-shadow: 2px 2px 0 #f3b47b, 3px 3px 0 rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+            margin-top: -2px;
+            margin-bottom: 4px;
+        }
+        h1 span {
+            display: inline-block;
+            animation: bounceTitle 2s infinite;
+        }
+        @keyframes bounceTitle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
         }
 
-        h1 { color: #4ecca3; margin-top: 0; }
+        /* ---------- PANTALLA DE INICIO ---------- */
+        #inicio {
+            text-align: center;
+            padding: 4px 0 0;
+        }
+        #inicio label {
+            display: block;
+            font-size: 1.0rem;
+            color: #5a2e0e;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .custom-select,
+        .custom-input {
+            position: relative;
+            display: inline-block;
+            margin: 2px 0 0;
+            width: 160px;
+        }
+        .custom-select select,
+        .custom-input input {
+            width: 100%;
+            padding: 6px 12px;
+            font-size: 1.0rem;
+            border-radius: 25px;
+            border: 2px solid #d49a6a;
+            background: #fff7e5;
+            font-family: inherit;
+            text-align: center;
+            outline: none;
+            transition: 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+            color: #3d1f0a;
+            font-weight: bold;
+        }
+        .custom-select select {
+            padding-right: 32px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23b86b2e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 18px;
+        }
+        .custom-select select:focus,
+        .custom-input input:focus {
+            border-color: #b86b2e;
+            box-shadow: 0 0 0 3px #fad6a8;
+        }
+        /* Aseguramos que el input number no muestre flechas */
+        .custom-input input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        .custom-input input::-webkit-outer-spin-button,
+        .custom-input input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
 
-        .stats-area {
+        #inicio .boton-grande {
+            background: #f5b06b;
+            border: none;
+            border-radius: 40px;
+            padding: 10px 30px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3d1f0a;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #a86f3a, 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: 0.08s linear;
+            margin-top: 12px;
+            font-family: inherit;
+            letter-spacing: 0.5px;
+        }
+        #inicio .boton-grande:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #a86f3a;
+        }
+        #inicio .boton-grande:hover {
+            background: #fabe7a;
+        }
+
+        /* ---------- BARRA SUPERIOR DEL JUEGO ---------- */
+        #barraSuperior {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            background: #fae3c0;
+            padding: 4px 10px;
+            border-radius: 30px;
+            border: 2px solid #dba87a;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #422712;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+        #barraSuperior span {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        #barraSuperior .icono {
+            font-size: 1.1rem;
+            margin-right: 2px;
+        }
+
+        /* ---------- CAMINO (15 CASILLAS) – GAP Y PADDING REDUCIDOS ---------- */
+        #camino {
+            display: grid;
+            grid-template-columns: repeat(10, 5fr);
+            gap: 3px;
+            background: #dba87a;
+            padding: 4px 4px;
+            border-radius: 20px;
+            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.15);
+            margin-bottom: 10px;
+        }
+        .casilla {
+            aspect-ratio: 1 / 1;
+            background: #efe0c9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4b2c15;
+            box-shadow: 0 2px 0 #b3865e, inset 0 -1.5px 0 #d6b491;
+            transition: 0.25s ease;
+            border: 1.5px solid #bb8b64;
+            user-select: none;
+            transform: scale(0.7);
+        }
+        .casilla.completada {
+            background: #8bc34a;
+            border-color: #558b2f;
+            box-shadow: 0 2px 0 #33691e, inset 0 -1.5px 0 #aed581;
+            color: #1e3a0e;
+        }
+        .casilla.actual {
+            background: #ffe082;
+            border-color: #f9a825;
+            box-shadow: 0 0 0 2px #fdd835, 0 2px 0 #f57f17;
+            animation: pulseActual 1s infinite alternate;
+            z-index: 2;
+        }
+        @keyframes pulseActual {
+            0% { box-shadow: 0 0 0 2px #fdd835, 0 2px 0 #f57f17; }
+            100% { box-shadow: 0 0 0 5px #fdd83588, 0 2px 0 #f57f17; }
+        }
+        .casilla.fallida {
+            animation: shakeFail 0.4s;
+            background: #ef5350 !important;
+            border-color: #b71c1c !important;
+        }
+        @keyframes shakeFail {
+            0% { transform: scale(0.7) translateX(0); }
+            20% { transform: scale(0.7) translateX(-4px); }
+            40% { transform: scale(0.7) translateX(4px); }
+            60% { transform: scale(0.7) translateX(-3px); }
+            80% { transform: scale(0.7) translateX(3px); }
+            100% { transform: scale(0.7) translateX(0); }
+        }
+
+        /* ---------- ÁREA DE OPERACIÓN (OPCIONES) ---------- */
+        #operacion {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 6px;
+            background: #fcf3e2;
+            padding: 8px 12px 12px;
+            border-radius: 30px;
+            border: 2px solid #dba87a;
+            margin-bottom: 6px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
         }
-
-        #score { font-size: 1.2rem; font-weight: bold; color: #e94560; }
-
-        #rewards { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; font-size: 1.5rem; min-height: 35px; }
-
-        #question { font-size: 3.5rem; font-weight: 800; color: #ffffff; margin-bottom: 20px; }
-
-        /* Esta sección ahora está oculta al establecer display: none */
-        #visual-aid {
-            display: none;
-        }
-
-        .circle {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            margin: 3px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        button {
-            padding: 20px;
-            font-size: 1.5rem;
+        #operacionTexto {
+            font-size: 1.7rem;
             font-weight: bold;
-            border-radius: 20px;
-            border: 4px solid;
+            color: #3d1f0a;
+            text-align: center;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        #opciones {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+        .opcion-boton {
+            background: #f5e6d3;
+            border: 2.5px solid #d49a6a;
+            border-radius: 40px;
+            padding: 5px 14px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3d1f0a;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 3px 0 #b3865e, 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.08s linear;
+            font-family: inherit;
+            min-width: 60px;
+            flex: 0 1 auto;
+            text-align: center;
+            background: #fff7e5;
+        }
+        .opcion-boton:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #b3865e;
+        }
+        .opcion-boton:hover {
+            background: #ffefd6;
+        }
+        .opcion-boton:disabled {
+            opacity: 0.5;
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #b3865e;
+            pointer-events: none;
+        }
+        .opcion-boton.correcto {
+            background: #8bc34a !important;
+            border-color: #33691e !important;
+            box-shadow: 0 2px 0 #33691e !important;
+            transform: scale(1.02);
+        }
+        .opcion-boton.incorrecto {
+            background: #ef5350 !important;
+            border-color: #b71c1c !important;
+            box-shadow: 0 2px 0 #b71c1c !important;
         }
 
-        button:hover { transform: scale(1.05); }
+        /* ---------- MENSAJE DE FEEDBACK ---------- */
+        #mensaje {
+            min-height: 2.2rem;
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: bold;
+            padding: 2px 0;
+            border-radius: 20px;
+            transition: 0.2s;
+        }
+        #mensaje.correcto {
+            color: #2e7d32;
+        }
+        #mensaje.incorrecto {
+            color: #c62828;
+        }
 
-        #btn0 { background-color: #0f3460; border-color: #4ecca3; color: #ffffff; }
-        #btn1 { background-color: #0f3460; border-color: #4ecca3; color: #ffffff; }
-        #btn2 { background-color: #0f3460; border-color: #4ecca3; color: #ffffff; }
-        #btn3 { background-color: #0f3460; border-color: #4ecca3; color: #ffffff; }
+        /* ---------- GAME OVER ---------- */
+        #gameover {
+            text-align: center;
+            padding: 8px 0;
+        }
+        #gameover h1 {
+            font-size: 2.2rem;
+            color: #b71c1c;
+            text-shadow: 2px 2px 0 #f48fb1;
+        }
+        #gameover p {
+            font-size: 1.2rem;
+            margin: 6px 0;
+            color: #3d1f0a;
+        }
+        #gameover .boton-grande {
+            background: #f5b06b;
+            border: none;
+            border-radius: 40px;
+            padding: 10px 28px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3d1f0a;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #a86f3a, 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: 0.08s linear;
+            margin-top: 10px;
+            font-family: inherit;
+        }
+        #gameover .boton-grande:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #a86f3a;
+        }
+
+        /* ---------- CONFETI ---------- */
+        .confeti {
+            position: fixed;
+            pointer-events: none;
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            z-index: 9999;
+            animation: caerConfeti 1.4s ease-out forwards;
+        }
+        @keyframes caerConfeti {
+            0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+            100% { opacity: 0; transform: translateY(400px) rotate(720deg) scale(0.3); }
+        }
+
+        /* ---------- ANIMACIÓN GOLOSINA ---------- */
+        @keyframes subirGolosina {
+            0% { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(-200px) scale(1.5) rotate(40deg); }
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 700px) {
+            .container {
+                padding: 8px 8px 12px;
+            }
+            h1 { font-size: 1.5rem; }
+            #camino {
+                gap: 2px;
+                padding: 3px 3px;
+            }
+            .casilla {
+                font-size: 1.0rem;
+                border-width: 1px;
+            }
+            #operacionTexto { font-size: 1.4rem; }
+            .opcion-boton {
+                font-size: 1.1rem;
+                padding: 4px 10px;
+                min-width: 50px;
+            }
+            #barraSuperior {
+                font-size: 0.7rem;
+                padding: 3px 6px;
+            }
+            #barraSuperior .icono { font-size: 0.9rem; }
+            .custom-select, .custom-input {
+                width: 130px;
+            }
+            .custom-select select, .custom-input input {
+                font-size: 0.9rem;
+                padding: 4px 8px;
+            }
+            #inicio .boton-grande {
+                font-size: 1.1rem;
+                padding: 8px 20px;
+            }
+            #gameover h1 { font-size: 1.8rem; }
+            #gameover p { font-size: 1.0rem; }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 4px 4px 8px;
+                border-width: 2px;
+            }
+            h1 { font-size: 1.2rem; margin-bottom: 2px; }
+            #camino {
+                gap: 2px;
+                padding: 2px 2px;
+            }
+            .casilla {
+                font-size: 0.8rem;
+                border-width: 1px;
+                box-shadow: 0 1px 0 #b3865e;
+            }
+            #operacion {
+                padding: 4px 6px 8px;
+                gap: 4px;
+            }
+            #operacionTexto { font-size: 1.1rem; }
+            .opcion-boton {
+                font-size: 0.9rem;
+                padding: 3px 6px;
+                min-width: 40px;
+                border-width: 2px;
+                box-shadow: 0 2px 0 #b3865e;
+            }
+            #barraSuperior {
+                font-size: 0.6rem;
+                padding: 2px 4px;
+                margin-bottom: 4px;
+            }
+            #barraSuperior .icono { font-size: 0.8rem; }
+            .custom-select, .custom-input {
+                width: 100px;
+            }
+            .custom-select select, .custom-input input {
+                font-size: 0.8rem;
+                padding: 3px 6px;
+                border-width: 2px;
+            }
+            #inicio .boton-grande {
+                font-size: 0.9rem;
+                padding: 6px 14px;
+                margin-top: 6px;
+            }
+            #gameover h1 { font-size: 1.4rem; }
+            #gameover p { font-size: 0.9rem; margin: 4px 0; }
+            #gameover .boton-grande {
+                font-size: 1.0rem;
+                padding: 6px 16px;
+            }
+            #mensaje {
+                font-size: 0.9rem;
+                min-height: 1.8rem;
+            }
+        }
+
+        /* ---------- OCULTAR PANTALLAS ---------- */
+        .oculto {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container-box">
-        <h1>¡A Jugar!</h1>
-        
-        <div class="stats-area">
-            <div id="score">Puntos: 0</div>
-            <div id="rewards" title="Tus premios"></div>
+    <div class="container">
+
+        <!-- ========== PANTALLA DE INICIO ========== -->
+        <div id="inicio">
+            <h1>🍭 Juego Matemático 🍭</h1>
+            <label>📚 Elige el tipo de operación</label>
+            <div class="custom-select">
+                <select id="tipoOperacion">
+                    <option value="suma">➕ Suma</option>
+                    <option value="resta">➖ Resta</option>
+                    <option value="multiplicacion">✖️ Multiplicación</option>
+                    <option value="division">➗ División</option>
+                    <option value="mixto">🎲 Mixto</option>
+                </select>
+            </div>
+
+            <label>📊 Nivel (1 al 5)</label>
+            <div class="custom-select"> <!-- Cambiado a select -->
+                <select id="nivelSelect">
+                    <option value="1">1 - Muy fácil</option>
+                    <option value="2">2 - Fácil</option>
+                    <option value="3" selected>3 - Medio</option>
+                    <option value="4">4 - Difícil</option>
+                    <option value="5">5 - Experto</option>
+                </select>
+            </div>
+
+            <button class="boton-grande" id="btnComenzar">🚀 ¡Jugar!</button>
         </div>
 
-        <div id="question">? + ?</div>
+        <!-- ========== PANTALLA DE JUEGO ========== -->
+        <div id="juego" class="oculto">
+            <!-- Barra superior -->
+            <div id="barraSuperior">
+                <span><span class="icono">⭐</span> <span id="puntosDisplay">100</span></span>
+                <span><span class="icono">🍬</span> <span id="golosinasDisplay">0</span></span>
+                <span><span class="icono">👣</span> <span id="pasoDisplay">1</span>/15</span>
+                <span><span class="icono">🏷️</span> Nv. <span id="nivelDisplay">1</span></span>
+            </div>
 
-        <!-- El contenedor visual ahora está oculto mediante CSS -->
-        <div id="visual-aid"></div>
+            <!-- Camino de 15 casillas -->
+            <div id="camino"></div>
 
-        <div class="grid">
-            <button onclick="checkAnswer(0)" id="btn0">?</button>
-            <button onclick="checkAnswer(1)" id="btn1">?</button>
-            <button onclick="checkAnswer(2)" id="btn2">?</button>
-            <button onclick="checkAnswer(3)" id="btn3">?</button>
+            <!-- Operación con opciones -->
+            <div id="operacion">
+                <span id="operacionTexto">3 + 5 = ?</span>
+                <div id="opciones">
+                    <button class="opcion-boton" data-valor="0">0</button>
+                    <button class="opcion-boton" data-valor="0">0</button>
+                    <button class="opcion-boton" data-valor="0">0</button>
+                </div>
+            </div>
+
+            <!-- Mensaje de feedback -->
+            <div id="mensaje"></div>
         </div>
+
+        <!-- ========== PANTALLA GAME OVER ========== -->
+        <div id="gameover" class="oculto">
+            <h1>💥 ¡Game Over!</h1>
+            <p>⭐ Puntuación final: <span id="puntosFinal">0</span></p>
+            <p>🍬 Golosinas: <span id="golosinasFinal">0</span></p>
+            <p>👣 Llegaste hasta el paso <span id="pasoFinal">1</span></p>
+            <button class="boton-grande" id="btnReiniciar">🔄 Volver a empezar</button>
+        </div>
+
     </div>
 
     <script>
-        let correctIndex;
-        let points = 0;
-        const rewards = ["⭐", "🍬", "🍭", "🍫", "🧸", "🎈", "🍪", "🍦"];
+        // ============================================================
+        //  JAVASCRIPT PRINCIPAL – MEJORADO: MIXTO, MÁS VARIEDAD, DROPDOWN NIVEL
+        // ============================================================
 
-        /* // Esta función ha sido comentada para que no se ejecute.
-        // Se encargaba de renderizar los círculos de apoyo visual.
-        function renderVisuals(a, b, isAddition) {
-            const container = document.getElementById('visual-aid');
-            container.innerHTML = '';
-            for(let i=0; i<a; i++) {
-                container.innerHTML += `<div class="circle" style="background-color: #4ecca3;"></div>`;
-            }
-            container.innerHTML += `<span style="margin: 0 10px; font-weight: bold; color: #ffffff;">${isAddition ? '+' : '-'}</span>`;
-            for(let i=0; i<b; i++) {
-                container.innerHTML += `<div class="circle" style="background-color: #e94560;"></div>`;
-            }
+        // ---------- ELEMENTOS DOM ----------
+        const inicio = document.getElementById('inicio');
+        const juego = document.getElementById('juego');
+        const gameover = document.getElementById('gameover');
+
+        const tipoSelect = document.getElementById('tipoOperacion');
+        const nivelSelect = document.getElementById('nivelSelect'); // ahora select
+        const btnComenzar = document.getElementById('btnComenzar');
+
+        const puntosDisplay = document.getElementById('puntosDisplay');
+        const golosinasDisplay = document.getElementById('golosinasDisplay');
+        const pasoDisplay = document.getElementById('pasoDisplay');
+        const nivelDisplay = document.getElementById('nivelDisplay');
+        const caminoDiv = document.getElementById('camino');
+        const operacionTexto = document.getElementById('operacionTexto');
+        const opcionesDiv = document.getElementById('opciones');
+        const mensajeDiv = document.getElementById('mensaje');
+
+        const puntosFinal = document.getElementById('puntosFinal');
+        const golosinasFinal = document.getElementById('golosinasFinal');
+        const pasoFinal = document.getElementById('pasoFinal');
+        const btnReiniciar = document.getElementById('btnReiniciar');
+
+        // ---------- CONSTANTES ----------
+        const TOTAL_PASOS = 15;
+
+        let tipo = 'suma';
+        let nivel = 1;
+        let puntos = 100;
+        let golosinas = 0;
+        let pasoActual = 0;
+        let operacionActual = null;
+        let juegoActivo = false;
+        let esperandoRespuesta = false;
+        let ultimaOperacionTexto = '';
+
+        // ---------- CONFIGURACIÓN DE NIVELES ----------
+        // Ahora los rangos son más amplios para mayor variedad
+        function getRangoSegunNivel(tipo, nivel) {
+            // Para suma/resta usamos números hasta cierto límite
+            // Para multiplicación/división usamos tablas de multiplicar
+            const limites = {
+                1: { maxNum: 10, maxTabla: 3 },
+                2: { maxNum: 20, maxTabla: 5 },
+                3: { maxNum: 50, maxTabla: 7 },
+                4: { maxNum: 100, maxTabla: 10 },
+                5: { maxNum: 200, maxTabla: 12 }
+            };
+            const lim = limites[nivel] || limites[3];
+            return { maxNum: lim.maxNum, maxTabla: lim.maxTabla };
         }
-        */
 
-        function generateQuestion() {
-            const isAddition = Math.random() > 0.5;
-            let a, b, answer;
+        // ---------- GENERAR OPERACIÓN (sin repetición y sin negativos, con mayor variedad) ----------
+        function generarOperacion(tipo, nivel) {
+            const { maxNum, maxTabla } = getRangoSegunNivel(tipo, nivel);
+            let a, b, operador, resultado, texto;
+            let intentos = 0;
+            let nuevaOperacion = null;
 
-            if (isAddition) {
-                a = Math.floor(Math.random() * 9) + 1;
-                b = Math.floor(Math.random() * 9) + 1;
-                answer = a + b;
-                document.getElementById('question').innerText = `${a} + ${b}`;
-            } else {
-                a = Math.floor(Math.random() * 9) + 5;
-                b = Math.floor(Math.random() * a);
-                answer = a - b;
-                document.getElementById('question').innerText = `${a} - ${b}`;
-            }
-
-            // renderVisuals(a, b, isAddition); // Llamada comentada para desactivar la visualización
-
-            const options = [answer];
-            while (options.length < 4) {
-                let fake = Math.floor(Math.random() * 20);
-                if (!options.includes(fake)) options.push(fake);
-            }
-
-            options.sort(() => Math.random() - 0.5);
-            correctIndex = options.indexOf(answer);
-
-            for (let i = 0; i < 4; i++) {
-                document.getElementById(`btn${i}`).innerText = options[i];
-            }
-        }
-
-        function checkAnswer(index) {
-            const rewardContainer = document.getElementById('rewards');
-            
-            if (index === correctIndex) {
-                points += 10;
-                const rewardIdx = (Math.floor(points / 10) - 1) % rewards.length;
-                rewardContainer.innerHTML += `<span>${rewards[rewardIdx]}</span>`;
-                generateQuestion();
-            } else {
-                if (points >= 10) {
-                    points -= 10;
-                    if(rewardContainer.lastChild) rewardContainer.removeChild(rewardContainer.lastChild);
+            // Para mixto, elegir aleatoriamente entre los tipos permitidos según nivel
+            let tiposDisponibles = [];
+            if (tipo === 'mixto') {
+                if (nivel <= 3) {
+                    tiposDisponibles = ['suma', 'resta'];
+                } else {
+                    tiposDisponibles = ['suma', 'resta', 'multiplicacion', 'division'];
                 }
-                document.body.style.backgroundColor = "#533434";
-                setTimeout(() => document.body.style.backgroundColor = "#1a1a2e", 200);
+                // Elegir un tipo aleatorio
+                const tipoElegido = tiposDisponibles[Math.floor(Math.random() * tiposDisponibles.length)];
+                return generarOperacion(tipoElegido, nivel);
             }
-            document.getElementById('score').innerText = `Puntos: ${points}`;
+
+            while (intentos < 30) {
+                // Generamos números con cierta aleatoriedad para evitar siempre 0,1,2
+                // Para suma/resta: a entre 0 y maxNum, b entre 0 y maxNum, pero con sesgo a números más grandes a veces
+                let rangoA, rangoB;
+                // Aleatoriamente elegimos si usar números pequeños o grandes
+                const sesgo = Math.random();
+                if (sesgo < 0.3) {
+                    // números pequeños (0-5)
+                    rangoA = Math.min(5, maxNum);
+                    rangoB = Math.min(5, maxNum);
+                } else if (sesgo < 0.6) {
+                    // números medios (hasta mitad del máximo)
+                    rangoA = Math.floor(maxNum * 0.5);
+                    rangoB = Math.floor(maxNum * 0.5);
+                } else {
+                    // números grandes (hasta el máximo)
+                    rangoA = maxNum;
+                    rangoB = maxNum;
+                }
+
+                switch (tipo) {
+                    case 'suma':
+                        a = Math.floor(Math.random() * (rangoA + 1));
+                        b = Math.floor(Math.random() * (rangoB + 1));
+                        resultado = a + b;
+                        operador = '+';
+                        texto = `${a} ${operador} ${b} = ?`;
+                        break;
+                    case 'resta':
+                        // Aseguramos a >= b
+                        a = Math.floor(Math.random() * (rangoA + 1));
+                        b = Math.floor(Math.random() * (a + 1)); // b entre 0 y a
+                        resultado = a - b;
+                        operador = '−';
+                        texto = `${a} ${operador} ${b} = ?`;
+                        break;
+                    case 'multiplicacion':
+                        // Usamos tablas de multiplicar, pero con números aleatorios hasta maxTabla
+                        const maxTab = maxTabla;
+                        a = Math.floor(Math.random() * maxTab) + 1;
+                        b = Math.floor(Math.random() * maxTab) + 1;
+                        // A veces forzar que sean números más grandes para variedad
+                        if (Math.random() > 0.7) {
+                            a = Math.floor(Math.random() * (maxTab * 0.5)) + Math.floor(maxTab * 0.5);
+                            b = Math.floor(Math.random() * (maxTab * 0.5)) + Math.floor(maxTab * 0.5);
+                            if (a > maxTab) a = maxTab;
+                            if (b > maxTab) b = maxTab;
+                        }
+                        resultado = a * b;
+                        operador = '×';
+                        texto = `${a} ${operador} ${b} = ?`;
+                        break;
+                    case 'division':
+                        // División exacta: a = b * c, resultado = c
+                        const maxTabDiv = maxTabla;
+                        b = Math.floor(Math.random() * maxTabDiv) + 1;
+                        let c = Math.floor(Math.random() * maxTabDiv) + 1;
+                        // Variar para que no siempre sean números pequeños
+                        if (Math.random() > 0.6) {
+                            b = Math.floor(Math.random() * (maxTabDiv * 0.5)) + Math.floor(maxTabDiv * 0.5);
+                            c = Math.floor(Math.random() * (maxTabDiv * 0.5)) + Math.floor(maxTabDiv * 0.5);
+                            if (b > maxTabDiv) b = maxTabDiv;
+                            if (c > maxTabDiv) c = maxTabDiv;
+                        }
+                        a = b * c;
+                        resultado = c;
+                        operador = '÷';
+                        texto = `${a} ${operador} ${b} = ?`;
+                        break;
+                    default:
+                        a = Math.floor(Math.random() * 11);
+                        b = Math.floor(Math.random() * 11);
+                        resultado = a + b;
+                        operador = '+';
+                        texto = `${a} ${operador} ${b} = ?`;
+                }
+
+                // Evitar repetición consecutiva
+                if (texto !== ultimaOperacionTexto) {
+                    nuevaOperacion = { a, b, operador, resultado, texto };
+                    break;
+                }
+                intentos++;
+            }
+
+            if (!nuevaOperacion) {
+                // Fallback: forzar cambio simple
+                switch (tipo) {
+                    case 'suma':
+                        a = (a + 1) % (maxNum + 1);
+                        b = (b + 2) % (maxNum + 1);
+                        resultado = a + b;
+                        texto = `${a} + ${b} = ?`;
+                        break;
+                    case 'resta':
+                        a = Math.min(a + 1, maxNum);
+                        b = Math.min(b + 1, a);
+                        resultado = a - b;
+                        texto = `${a} − ${b} = ?`;
+                        break;
+                    case 'multiplicacion':
+                        a = (a % maxTabla) + 1;
+                        b = (b % maxTabla) + 1;
+                        resultado = a * b;
+                        texto = `${a} × ${b} = ?`;
+                        break;
+                    case 'division':
+                        b = (b % maxTabla) + 1;
+                        let c2 = (c % maxTabla) + 1;
+                        a = b * c2;
+                        resultado = c2;
+                        texto = `${a} ÷ ${b} = ?`;
+                        break;
+                    default:
+                        break;
+                }
+                nuevaOperacion = { a, b, operador, resultado, texto };
+            }
+
+            ultimaOperacionTexto = nuevaOperacion.texto;
+            return nuevaOperacion;
         }
 
-        generateQuestion();
+        // ---------- GENERAR OPCIONES (sin negativos) ----------
+        function generarOpciones(resultado) {
+            let opciones = new Set();
+            opciones.add(resultado);
+
+            let candidatos = [];
+            if (resultado === 0) {
+                candidatos = [1, 2, 3, 4, 5];
+            } else {
+                // Generar un rango alrededor del resultado, pero sin negativos
+                let base = Math.max(0, resultado - 8);
+                let tope = resultado + 8;
+                for (let i = base; i <= tope; i++) {
+                    if (i !== resultado) candidatos.push(i);
+                }
+                // Si hay muy pocos, agregar más
+                while (candidatos.length < 12) {
+                    candidatos.push(resultado + candidatos.length + 3);
+                }
+            }
+
+            // Mezclar y tomar hasta 3 distintos
+            for (let i = candidatos.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [candidatos[i], candidatos[j]] = [candidatos[j], candidatos[i]];
+            }
+
+            for (let val of candidatos) {
+                if (opciones.size >= 3) break;
+                if (val >= 0 && !opciones.has(val)) {
+                    opciones.add(val);
+                }
+            }
+
+            // Rellenar si faltan
+            let extra = 1;
+            while (opciones.size < 3) {
+                let cand = resultado + extra;
+                if (cand < 0) cand = resultado + extra + 10;
+                if (!opciones.has(cand) && cand >= 0) {
+                    opciones.add(cand);
+                }
+                extra++;
+            }
+
+            let arr = Array.from(opciones);
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // ---------- ACTUALIZAR OPCIONES ----------
+        function actualizarOpciones(opcionesArray) {
+            const botones = opcionesDiv.querySelectorAll('.opcion-boton');
+            botones.forEach((btn, idx) => {
+                btn.textContent = opcionesArray[idx];
+                btn.dataset.valor = opcionesArray[idx];
+                btn.className = 'opcion-boton';
+                btn.disabled = false;
+            });
+        }
+
+        // ---------- RENDERIZAR CAMINO ----------
+        function renderizarCamino() {
+            caminoDiv.innerHTML = '';
+            for (let i = 0; i < TOTAL_PASOS; i++) {
+                const casilla = document.createElement('div');
+                casilla.className = 'casilla';
+                casilla.textContent = i + 1;
+                if (i < pasoActual) {
+                    casilla.classList.add('completada');
+                } else if (i === pasoActual) {
+                    casilla.classList.add('actual');
+                }
+                caminoDiv.appendChild(casilla);
+            }
+        }
+
+        // ---------- ACTUALIZAR BARRA SUPERIOR ----------
+        function actualizarBarra() {
+            puntosDisplay.textContent = puntos;
+            golosinasDisplay.textContent = golosinas;
+            pasoDisplay.textContent = pasoActual + 1;
+            nivelDisplay.textContent = nivel;
+        }
+
+        // ---------- MOSTRAR MENSAJE ----------
+        function mostrarMensaje(texto, tipoMensaje) {
+            mensajeDiv.textContent = texto;
+            mensajeDiv.className = tipoMensaje || '';
+            if (window.timeoutMensaje) clearTimeout(window.timeoutMensaje);
+            window.timeoutMensaje = setTimeout(() => {
+                mensajeDiv.textContent = '';
+                mensajeDiv.className = '';
+            }, 2500);
+        }
+
+        // ---------- CONFETI ----------
+        function lanzarConfeti(cantidad = 30) {
+            const colores = ['#f44336', '#e91e63', '#9c27b0', '#3f51b5', '#4caf50', '#ffeb3b', '#ff9800', '#00bcd4'];
+            for (let i = 0; i < cantidad; i++) {
+                const el = document.createElement('div');
+                el.className = 'confeti';
+                el.style.left = (Math.random() * 100) + 'vw';
+                el.style.top = '-10px';
+                el.style.background = colores[Math.floor(Math.random() * colores.length)];
+                el.style.width = (5 + Math.random() * 6) + 'px';
+                el.style.height = (5 + Math.random() * 6) + 'px';
+                el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                el.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 1600);
+            }
+        }
+
+        // ---------- ANIMACIÓN GOLOSINA ----------
+        function animarGolosina() {
+            const el = document.createElement('div');
+            el.textContent = '🍬';
+            el.style.position = 'fixed';
+            el.style.fontSize = '3rem';
+            el.style.left = (30 + Math.random() * 40) + '%';
+            el.style.bottom = '20%';
+            el.style.pointerEvents = 'none';
+            el.style.zIndex = '9998';
+            el.style.animation = 'subirGolosina 1.1s ease-out forwards';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 1200);
+        }
+
+        // ---------- MANEJAR RESPUESTA ----------
+        function manejarOpcion(e) {
+            const btn = e.currentTarget;
+            if (!juegoActivo || esperandoRespuesta || btn.disabled) return;
+            if (pasoActual >= TOTAL_PASOS) return;
+
+            const valor = parseInt(btn.dataset.valor);
+            if (isNaN(valor)) return;
+
+            esperandoRespuesta = true;
+            const botones = opcionesDiv.querySelectorAll('.opcion-boton');
+            botones.forEach(b => b.disabled = true);
+
+            const correcto = (valor === operacionActual.resultado);
+
+            if (correcto) {
+                puntos += 10;
+                golosinas += 1;
+                mostrarMensaje('🎉 ¡Correcto! +10 y 🍬', 'correcto');
+                lanzarConfeti(25);
+                animarGolosina();
+                btn.classList.add('correcto');
+
+                pasoActual++;
+                if (pasoActual >= TOTAL_PASOS) {
+                    juegoActivo = false;
+                    actualizarBarra();
+                    renderizarCamino();
+                    mostrarMensaje('🏆 ¡Felicidades! ¡Completaste el camino!', 'correcto');
+                    botones.forEach(b => b.disabled = true);
+                    setTimeout(() => finalizarJuego(true), 1500);
+                    esperandoRespuesta = false;
+                    return;
+                }
+                actualizarBarra();
+                renderizarCamino();
+
+                setTimeout(() => {
+                    operacionActual = generarOperacion(tipo, nivel);
+                    operacionTexto.textContent = operacionActual.texto;
+                    const opciones = generarOpciones(operacionActual.resultado);
+                    actualizarOpciones(opciones);
+                    mostrarMensaje('', '');
+                    esperandoRespuesta = false;
+                    botones.forEach(b => b.disabled = false);
+                }, 600);
+            } else {
+                puntos -= 10;
+                if (golosinas > 0) {
+                    golosinas -= 1;
+                    mostrarMensaje(`❌ Incorrecto. -10 y -🍬`, 'incorrecto');
+                } else {
+                    mostrarMensaje(`❌ Incorrecto. -10`, 'incorrecto');
+                }
+                btn.classList.add('incorrecto');
+                botones.forEach(b => {
+                    if (parseInt(b.dataset.valor) === operacionActual.resultado) {
+                        b.classList.add('correcto');
+                    }
+                });
+
+                const casillas = document.querySelectorAll('.casilla');
+                if (casillas[pasoActual]) {
+                    casillas[pasoActual].classList.add('fallida');
+                    setTimeout(() => {
+                        casillas[pasoActual].classList.remove('fallida');
+                    }, 500);
+                }
+
+                actualizarBarra();
+
+                if (puntos <= 0) {
+                    puntos = 0;
+                    actualizarBarra();
+                    juegoActivo = false;
+                    botones.forEach(b => b.disabled = true);
+                    mostrarMensaje('💔 ¡Has perdido todos tus puntos!', 'incorrecto');
+                    setTimeout(() => finalizarJuego(false), 1500);
+                    esperandoRespuesta = false;
+                    return;
+                }
+
+                setTimeout(() => {
+                    operacionActual = generarOperacion(tipo, nivel);
+                    operacionTexto.textContent = operacionActual.texto;
+                    const opciones = generarOpciones(operacionActual.resultado);
+                    actualizarOpciones(opciones);
+                    mostrarMensaje('', '');
+                    esperandoRespuesta = false;
+                    botones.forEach(b => b.disabled = false);
+                }, 800);
+            }
+        }
+
+        // ---------- FINALIZAR JUEGO ----------
+        function finalizarJuego(ganado) {
+            juego.classList.add('oculto');
+            gameover.classList.remove('oculto');
+            puntosFinal.textContent = puntos;
+            golosinasFinal.textContent = golosinas;
+            pasoFinal.textContent = Math.min(pasoActual + 1, TOTAL_PASOS);
+
+            if (ganado) {
+                document.querySelector('#gameover h1').textContent = '🎉 ¡VICTORIA!';
+                document.querySelector('#gameover h1').style.color = '#2e7d32';
+                lanzarConfeti(50);
+            } else {
+                document.querySelector('#gameover h1').textContent = '💥 ¡Game Over!';
+                document.querySelector('#gameover h1').style.color = '#b71c1c';
+            }
+        }
+
+        // ---------- INICIAR JUEGO ----------
+        function iniciarJuego() {
+            tipo = tipoSelect.value;
+            nivel = parseInt(nivelSelect.value);
+            if (isNaN(nivel) || nivel < 1) nivel = 1;
+            if (nivel > 5) nivel = 5;
+
+            puntos = 100;
+            golosinas = 0;
+            pasoActual = 0;
+            juegoActivo = true;
+            esperandoRespuesta = false;
+            ultimaOperacionTexto = '';
+
+            inicio.classList.add('oculto');
+            gameover.classList.add('oculto');
+            juego.classList.remove('oculto');
+
+            renderizarCamino();
+            actualizarBarra();
+
+            operacionActual = generarOperacion(tipo, nivel);
+            operacionTexto.textContent = operacionActual.texto;
+            const opciones = generarOpciones(operacionActual.resultado);
+            actualizarOpciones(opciones);
+            mensajeDiv.textContent = '';
+            mensajeDiv.className = '';
+
+            const botones = opcionesDiv.querySelectorAll('.opcion-boton');
+            botones.forEach(btn => {
+                btn.removeEventListener('click', manejarOpcion);
+                btn.addEventListener('click', manejarOpcion);
+            });
+        }
+
+        // ---------- REINICIAR ----------
+        function reiniciarJuego() {
+            gameover.classList.add('oculto');
+            inicio.classList.remove('oculto');
+            juego.classList.add('oculto');
+            mensajeDiv.textContent = '';
+            mensajeDiv.className = '';
+            nivelSelect.focus();
+        }
+
+        // ---------- EVENTOS ----------
+        btnComenzar.addEventListener('click', iniciarJuego);
+        btnReiniciar.addEventListener('click', reiniciarJuego);
+
+        // ---------- INICIO ----------
+        inicio.classList.remove('oculto');
+        juego.classList.add('oculto');
+        gameover.classList.add('oculto');
     </script>
+
 </body>
 </html>
