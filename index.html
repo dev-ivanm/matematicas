@@ -6,11 +6,7 @@
     <title>🍭 Juego Matemático - 15 Niveles</title>
     <style>
         /* ---------- RESET Y ESTILOS GLOBALES ---------- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
             background: linear-gradient(145deg, #f9e7b3 0%, #f5d78e 100%);
@@ -25,7 +21,7 @@
             background: rgba(255, 247, 220, 0.85);
             backdrop-filter: blur(4px);
             border-radius: 30px 30px 25px 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 2px 6px rgba(255, 255, 200, 0.6);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2), inset 0 2px 6px rgba(255,255,200,0.6);
             padding: 10px 14px 14px;
             max-width: 750px;
             width: 100%;
@@ -36,41 +32,24 @@
             text-align: center;
             font-size: 1.8rem;
             color: #7a3b1e;
-            text-shadow: 2px 2px 0 #f3b47b, 3px 3px 0 rgba(0, 0, 0, 0.1);
+            text-shadow: 2px 2px 0 #f3b47b, 3px 3px 0 rgba(0,0,0,0.1);
             letter-spacing: 1px;
             margin-top: -2px;
             margin-bottom: 4px;
         }
-        h1 span {
-            display: inline-block;
-            animation: bounceTitle 2s infinite;
-        }
-        @keyframes bounceTitle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-        }
+        h1 span { display: inline-block; animation: bounceTitle 2s infinite; }
+        @keyframes bounceTitle { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
         /* ---------- PANTALLA DE INICIO ---------- */
-        #inicio {
-            text-align: center;
-            padding: 4px 0 0;
-        }
-        #inicio label {
-            display: block;
-            font-size: 1.0rem;
-            color: #5a2e0e;
-            margin-top: 8px;
-            font-weight: bold;
-        }
-        .custom-select,
-        .custom-input {
+        #inicio { text-align: center; padding: 4px 0 0; }
+        #inicio label { display: block; font-size: 1.0rem; color: #5a2e0e; margin-top: 8px; font-weight: bold; }
+        .custom-select, .custom-input {
             position: relative;
             display: inline-block;
             margin: 2px 0 0;
             width: 160px;
         }
-        .custom-select select,
-        .custom-input input {
+        .custom-select select, .custom-input input {
             width: 100%;
             padding: 6px 12px;
             font-size: 1.0rem;
@@ -95,20 +74,13 @@
             background-position: right 8px center;
             background-size: 18px;
         }
-        .custom-select select:focus,
-        .custom-input input:focus {
+        .custom-select select:focus, .custom-input input:focus {
             border-color: #b86b2e;
             box-shadow: 0 0 0 3px #fad6a8;
         }
-        /* Aseguramos que el input number no muestre flechas */
-        .custom-input input[type="number"] {
-            -moz-appearance: textfield;
-        }
+        .custom-input input[type="number"] { -moz-appearance: textfield; }
         .custom-input input::-webkit-outer-spin-button,
-        .custom-input input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+        .custom-input input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
         #inicio .boton-grande {
             background: #f5b06b;
@@ -119,21 +91,16 @@
             font-weight: bold;
             color: #3d1f0a;
             cursor: pointer;
-            box-shadow: 0 4px 0 #a86f3a, 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 0 #a86f3a, 0 6px 12px rgba(0,0,0,0.15);
             transition: 0.08s linear;
             margin-top: 12px;
             font-family: inherit;
             letter-spacing: 0.5px;
         }
-        #inicio .boton-grande:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 #a86f3a;
-        }
-        #inicio .boton-grande:hover {
-            background: #fabe7a;
-        }
+        #inicio .boton-grande:active { transform: translateY(3px); box-shadow: 0 1px 0 #a86f3a; }
+        #inicio .boton-grande:hover { background: #fabe7a; }
 
-        /* ---------- BARRA SUPERIOR DEL JUEGO ---------- */
+        /* ---------- BARRA SUPERIOR ---------- */
         #barraSuperior {
             display: flex;
             flex-wrap: wrap;
@@ -147,27 +114,20 @@
             font-size: 0.85rem;
             font-weight: bold;
             color: #422712;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.04);
         }
-        #barraSuperior span {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-        #barraSuperior .icono {
-            font-size: 1.1rem;
-            margin-right: 2px;
-        }
+        #barraSuperior span { display: flex; align-items: center; gap: 2px; }
+        #barraSuperior .icono { font-size: 1.1rem; margin-right: 2px; }
 
-        /* ---------- CAMINO (15 CASILLAS) – GAP Y PADDING REDUCIDOS ---------- */
+        /* ---------- CAMINO (15 CASILLAS) – CORREGIDO ---------- */
         #camino {
             display: grid;
-            grid-template-columns: repeat(10, 5fr);
+            grid-template-columns: repeat(5, 1fr);  /* <--- CORREGIDO */
             gap: 3px;
             background: #dba87a;
             padding: 4px 4px;
             border-radius: 20px;
-            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: inset 0 3px 8px rgba(0,0,0,0.15);
             margin-bottom: 10px;
         }
         .casilla {
@@ -217,7 +177,7 @@
             100% { transform: scale(0.7) translateX(0); }
         }
 
-        /* ---------- ÁREA DE OPERACIÓN (OPCIONES) ---------- */
+        /* ---------- OPERACIÓN ---------- */
         #operacion {
             display: flex;
             flex-direction: column;
@@ -228,9 +188,8 @@
             border-radius: 30px;
             border: 2px solid #dba87a;
             margin-bottom: 6px;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.04);
         }
-<<<<<<< HEAD
         #operacionTexto {
             font-size: 1.7rem;
             font-weight: bold;
@@ -245,18 +204,6 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-=======
-
-        #score { font-size: 1.2rem; font-weight: bold; color: #e94560; }
-
-        #rewards { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; font-size: 1.5rem; min-height: 35px; }
-
-        #question { font-size: 3.5rem; font-weight: 800; color: #ffffff; margin-bottom: 20px; }
-
-        /* Esta sección ahora está oculta al establecer display: none */
-        #visual-aid {
-            display: none;
->>>>>>> 5aadb4244ac62b6118292133b6fc0b7bea66eb30
         }
         .opcion-boton {
             background: #f5e6d3;
@@ -267,7 +214,7 @@
             font-weight: bold;
             color: #3d1f0a;
             cursor: pointer;
-            box-shadow: 0 3px 0 #b3865e, 0 3px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 0 #b3865e, 0 3px 8px rgba(0,0,0,0.1);
             transition: 0.08s linear;
             font-family: inherit;
             min-width: 60px;
@@ -275,13 +222,8 @@
             text-align: center;
             background: #fff7e5;
         }
-        .opcion-boton:active {
-            transform: translateY(2px);
-            box-shadow: 0 1px 0 #b3865e;
-        }
-        .opcion-boton:hover {
-            background: #ffefd6;
-        }
+        .opcion-boton:active { transform: translateY(2px); box-shadow: 0 1px 0 #b3865e; }
+        .opcion-boton:hover { background: #ffefd6; }
         .opcion-boton:disabled {
             opacity: 0.5;
             transform: translateY(2px);
@@ -300,7 +242,7 @@
             box-shadow: 0 2px 0 #b71c1c !important;
         }
 
-        /* ---------- MENSAJE DE FEEDBACK ---------- */
+        /* ---------- MENSAJE ---------- */
         #mensaje {
             min-height: 2.2rem;
             font-size: 1.1rem;
@@ -310,28 +252,17 @@
             border-radius: 20px;
             transition: 0.2s;
         }
-        #mensaje.correcto {
-            color: #2e7d32;
-        }
-        #mensaje.incorrecto {
-            color: #c62828;
-        }
+        #mensaje.correcto { color: #2e7d32; }
+        #mensaje.incorrecto { color: #c62828; }
 
         /* ---------- GAME OVER ---------- */
-        #gameover {
-            text-align: center;
-            padding: 8px 0;
-        }
+        #gameover { text-align: center; padding: 8px 0; }
         #gameover h1 {
             font-size: 2.2rem;
             color: #b71c1c;
             text-shadow: 2px 2px 0 #f48fb1;
         }
-        #gameover p {
-            font-size: 1.2rem;
-            margin: 6px 0;
-            color: #3d1f0a;
-        }
+        #gameover p { font-size: 1.2rem; margin: 6px 0; color: #3d1f0a; }
         #gameover .boton-grande {
             background: #f5b06b;
             border: none;
@@ -341,15 +272,12 @@
             font-weight: bold;
             color: #3d1f0a;
             cursor: pointer;
-            box-shadow: 0 4px 0 #a86f3a, 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 0 #a86f3a, 0 6px 12px rgba(0,0,0,0.15);
             transition: 0.08s linear;
             margin-top: 10px;
             font-family: inherit;
         }
-        #gameover .boton-grande:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 #a86f3a;
-        }
+        #gameover .boton-grande:active { transform: translateY(3px); box-shadow: 0 1px 0 #a86f3a; }
 
         /* ---------- CONFETI ---------- */
         .confeti {
@@ -365,8 +293,6 @@
             0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
             100% { opacity: 0; transform: translateY(400px) rotate(720deg) scale(0.3); }
         }
-
-        /* ---------- ANIMACIÓN GOLOSINA ---------- */
         @keyframes subirGolosina {
             0% { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); }
             100% { opacity: 0; transform: translateY(-200px) scale(1.5) rotate(40deg); }
@@ -374,112 +300,44 @@
 
         /* ---------- RESPONSIVE ---------- */
         @media (max-width: 700px) {
-            .container {
-                padding: 8px 8px 12px;
-            }
+            .container { padding: 8px 8px 12px; }
             h1 { font-size: 1.5rem; }
-            #camino {
-                gap: 2px;
-                padding: 3px 3px;
-            }
-            .casilla {
-                font-size: 1.0rem;
-                border-width: 1px;
-            }
+            #camino { gap: 2px; padding: 3px 3px; }
+            .casilla { font-size: 1.0rem; border-width: 1px; }
             #operacionTexto { font-size: 1.4rem; }
-            .opcion-boton {
-                font-size: 1.1rem;
-                padding: 4px 10px;
-                min-width: 50px;
-            }
-            #barraSuperior {
-                font-size: 0.7rem;
-                padding: 3px 6px;
-            }
+            .opcion-boton { font-size: 1.1rem; padding: 4px 10px; min-width: 50px; }
+            #barraSuperior { font-size: 0.7rem; padding: 3px 6px; }
             #barraSuperior .icono { font-size: 0.9rem; }
-            .custom-select, .custom-input {
-                width: 130px;
-            }
-            .custom-select select, .custom-input input {
-                font-size: 0.9rem;
-                padding: 4px 8px;
-            }
-            #inicio .boton-grande {
-                font-size: 1.1rem;
-                padding: 8px 20px;
-            }
+            .custom-select, .custom-input { width: 130px; }
+            .custom-select select, .custom-input input { font-size: 0.9rem; padding: 4px 8px; }
+            #inicio .boton-grande { font-size: 1.1rem; padding: 8px 20px; }
             #gameover h1 { font-size: 1.8rem; }
             #gameover p { font-size: 1.0rem; }
         }
         @media (max-width: 480px) {
-            .container {
-                padding: 4px 4px 8px;
-                border-width: 2px;
-            }
+            .container { padding: 4px 4px 8px; border-width: 2px; }
             h1 { font-size: 1.2rem; margin-bottom: 2px; }
-            #camino {
-                gap: 2px;
-                padding: 2px 2px;
-            }
-            .casilla {
-                font-size: 0.8rem;
-                border-width: 1px;
-                box-shadow: 0 1px 0 #b3865e;
-            }
-            #operacion {
-                padding: 4px 6px 8px;
-                gap: 4px;
-            }
+            #camino { gap: 2px; padding: 2px 2px; }
+            .casilla { font-size: 0.8rem; border-width: 1px; box-shadow: 0 1px 0 #b3865e; }
+            #operacion { padding: 4px 6px 8px; gap: 4px; }
             #operacionTexto { font-size: 1.1rem; }
-            .opcion-boton {
-                font-size: 0.9rem;
-                padding: 3px 6px;
-                min-width: 40px;
-                border-width: 2px;
-                box-shadow: 0 2px 0 #b3865e;
-            }
-            #barraSuperior {
-                font-size: 0.6rem;
-                padding: 2px 4px;
-                margin-bottom: 4px;
-            }
+            .opcion-boton { font-size: 0.9rem; padding: 3px 6px; min-width: 40px; border-width: 2px; box-shadow: 0 2px 0 #b3865e; }
+            #barraSuperior { font-size: 0.6rem; padding: 2px 4px; margin-bottom: 4px; }
             #barraSuperior .icono { font-size: 0.8rem; }
-            .custom-select, .custom-input {
-                width: 100px;
-            }
-            .custom-select select, .custom-input input {
-                font-size: 0.8rem;
-                padding: 3px 6px;
-                border-width: 2px;
-            }
-            #inicio .boton-grande {
-                font-size: 0.9rem;
-                padding: 6px 14px;
-                margin-top: 6px;
-            }
+            .custom-select, .custom-input { width: 100px; }
+            .custom-select select, .custom-input input { font-size: 0.8rem; padding: 3px 6px; border-width: 2px; }
+            #inicio .boton-grande { font-size: 0.9rem; padding: 6px 14px; margin-top: 6px; }
             #gameover h1 { font-size: 1.4rem; }
             #gameover p { font-size: 0.9rem; margin: 4px 0; }
-            #gameover .boton-grande {
-                font-size: 1.0rem;
-                padding: 6px 16px;
-            }
-            #mensaje {
-                font-size: 0.9rem;
-                min-height: 1.8rem;
-            }
+            #gameover .boton-grande { font-size: 1.0rem; padding: 6px 16px; }
+            #mensaje { font-size: 0.9rem; min-height: 1.8rem; }
         }
-
-        /* ---------- OCULTAR PANTALLAS ---------- */
-        .oculto {
-            display: none !important;
-        }
+        .oculto { display: none !important; }
     </style>
 </head>
 <body>
-
     <div class="container">
-
-        <!-- ========== PANTALLA DE INICIO ========== -->
+        <!-- INICIO -->
         <div id="inicio">
             <h1>🍭 Juego Matemático 🍭</h1>
             <label>📚 Elige el tipo de operación</label>
@@ -492,9 +350,8 @@
                     <option value="mixto">🎲 Mixto</option>
                 </select>
             </div>
-
             <label>📊 Nivel (1 al 5)</label>
-            <div class="custom-select"> <!-- Cambiado a select -->
+            <div class="custom-select">
                 <select id="nivelSelect">
                     <option value="1">1 - Muy fácil</option>
                     <option value="2">2 - Fácil</option>
@@ -503,29 +360,18 @@
                     <option value="5">5 - Experto</option>
                 </select>
             </div>
-
             <button class="boton-grande" id="btnComenzar">🚀 ¡Jugar!</button>
         </div>
 
-        <!-- ========== PANTALLA DE JUEGO ========== -->
+        <!-- JUEGO -->
         <div id="juego" class="oculto">
-            <!-- Barra superior -->
             <div id="barraSuperior">
                 <span><span class="icono">⭐</span> <span id="puntosDisplay">100</span></span>
                 <span><span class="icono">🍬</span> <span id="golosinasDisplay">0</span></span>
                 <span><span class="icono">👣</span> <span id="pasoDisplay">1</span>/15</span>
                 <span><span class="icono">🏷️</span> Nv. <span id="nivelDisplay">1</span></span>
             </div>
-
-<<<<<<< HEAD
-            <!-- Camino de 15 casillas -->
             <div id="camino"></div>
-=======
-        <!-- El contenedor visual ahora está oculto mediante CSS -->
-        <div id="visual-aid"></div>
->>>>>>> 5aadb4244ac62b6118292133b6fc0b7bea66eb30
-
-            <!-- Operación con opciones -->
             <div id="operacion">
                 <span id="operacionTexto">3 + 5 = ?</span>
                 <div id="opciones">
@@ -534,12 +380,10 @@
                     <button class="opcion-boton" data-valor="0">0</button>
                 </div>
             </div>
-
-            <!-- Mensaje de feedback -->
             <div id="mensaje"></div>
         </div>
 
-        <!-- ========== PANTALLA GAME OVER ========== -->
+        <!-- GAME OVER -->
         <div id="gameover" class="oculto">
             <h1>💥 ¡Game Over!</h1>
             <p>⭐ Puntuación final: <span id="puntosFinal">0</span></p>
@@ -547,22 +391,19 @@
             <p>👣 Llegaste hasta el paso <span id="pasoFinal">1</span></p>
             <button class="boton-grande" id="btnReiniciar">🔄 Volver a empezar</button>
         </div>
-
     </div>
 
     <script>
         // ============================================================
-        //  JAVASCRIPT PRINCIPAL – MEJORADO: MIXTO, MÁS VARIEDAD, DROPDOWN NIVEL
+        //  JAVASCRIPT – MIXTO FUNCIONAL, VARIEDAD, DROPDOWN NIVEL
         // ============================================================
 
-<<<<<<< HEAD
-        // ---------- ELEMENTOS DOM ----------
         const inicio = document.getElementById('inicio');
         const juego = document.getElementById('juego');
         const gameover = document.getElementById('gameover');
 
         const tipoSelect = document.getElementById('tipoOperacion');
-        const nivelSelect = document.getElementById('nivelSelect'); // ahora select
+        const nivelSelect = document.getElementById('nivelSelect');
         const btnComenzar = document.getElementById('btnComenzar');
 
         const puntosDisplay = document.getElementById('puntosDisplay');
@@ -579,24 +420,14 @@
         const pasoFinal = document.getElementById('pasoFinal');
         const btnReiniciar = document.getElementById('btnReiniciar');
 
-        // ---------- CONSTANTES ----------
         const TOTAL_PASOS = 15;
-
-        let tipo = 'suma';
-        let nivel = 1;
-        let puntos = 100;
-        let golosinas = 0;
-        let pasoActual = 0;
+        let tipo = 'suma', nivel = 1;
+        let puntos = 100, golosinas = 0, pasoActual = 0;
         let operacionActual = null;
-        let juegoActivo = false;
-        let esperandoRespuesta = false;
+        let juegoActivo = false, esperandoRespuesta = false;
         let ultimaOperacionTexto = '';
 
-        // ---------- CONFIGURACIÓN DE NIVELES ----------
-        // Ahora los rangos son más amplios para mayor variedad
         function getRangoSegunNivel(tipo, nivel) {
-            // Para suma/resta usamos números hasta cierto límite
-            // Para multiplicación/división usamos tablas de multiplicar
             const limites = {
                 1: { maxNum: 10, maxTabla: 3 },
                 2: { maxNum: 20, maxTabla: 5 },
@@ -604,104 +435,32 @@
                 4: { maxNum: 100, maxTabla: 10 },
                 5: { maxNum: 200, maxTabla: 12 }
             };
-            const lim = limites[nivel] || limites[3];
-            return { maxNum: lim.maxNum, maxTabla: lim.maxTabla };
-=======
-        /* // Esta función ha sido comentada para que no se ejecute.
-        // Se encargaba de renderizar los círculos de apoyo visual.
-        function renderVisuals(a, b, isAddition) {
-            const container = document.getElementById('visual-aid');
-            container.innerHTML = '';
-            for(let i=0; i<a; i++) {
-                container.innerHTML += `<div class="circle" style="background-color: #4ecca3;"></div>`;
-            }
-            container.innerHTML += `<span style="margin: 0 10px; font-weight: bold; color: #ffffff;">${isAddition ? '+' : '-'}</span>`;
-            for(let i=0; i<b; i++) {
-                container.innerHTML += `<div class="circle" style="background-color: #e94560;"></div>`;
-            }
->>>>>>> 5aadb4244ac62b6118292133b6fc0b7bea66eb30
+            return limites[nivel] || limites[3];
         }
-        */
 
-        // ---------- GENERAR OPERACIÓN (sin repetición y sin negativos, con mayor variedad) ----------
         function generarOperacion(tipo, nivel) {
             const { maxNum, maxTabla } = getRangoSegunNivel(tipo, nivel);
             let a, b, operador, resultado, texto;
-            let intentos = 0;
-            let nuevaOperacion = null;
+            let intentos = 0, nuevaOperacion = null;
 
-<<<<<<< HEAD
-            // Para mixto, elegir aleatoriamente entre los tipos permitidos según nivel
             let tiposDisponibles = [];
             if (tipo === 'mixto') {
-                if (nivel <= 3) {
-                    tiposDisponibles = ['suma', 'resta'];
-                } else {
-                    tiposDisponibles = ['suma', 'resta', 'multiplicacion', 'division'];
-=======
-            if (isAddition) {
-                a = Math.floor(Math.random() * 9) + 1;
-                b = Math.floor(Math.random() * 9) + 1;
-                answer = a + b;
-                document.getElementById('question').innerText = `${a} + ${b}`;
-            } else {
-                a = Math.floor(Math.random() * 9) + 5;
-                b = Math.floor(Math.random() * a);
-                answer = a - b;
-                document.getElementById('question').innerText = `${a} - ${b}`;
-            }
-
-            // renderVisuals(a, b, isAddition); // Llamada comentada para desactivar la visualización
-
-            const options = [answer];
-            while (options.length < 4) {
-                let fake = Math.floor(Math.random() * 20);
-                if (!options.includes(fake)) options.push(fake);
-            }
-
-            options.sort(() => Math.random() - 0.5);
-            correctIndex = options.indexOf(answer);
-
-            for (let i = 0; i < 4; i++) {
-                document.getElementById(`btn${i}`).innerText = options[i];
-            }
-        }
-
-        function checkAnswer(index) {
-            const rewardContainer = document.getElementById('rewards');
-            
-            if (index === correctIndex) {
-                points += 10;
-                const rewardIdx = (Math.floor(points / 10) - 1) % rewards.length;
-                rewardContainer.innerHTML += `<span>${rewards[rewardIdx]}</span>`;
-                generateQuestion();
-            } else {
-                if (points >= 10) {
-                    points -= 10;
-                    if(rewardContainer.lastChild) rewardContainer.removeChild(rewardContainer.lastChild);
->>>>>>> 5aadb4244ac62b6118292133b6fc0b7bea66eb30
-                }
-                // Elegir un tipo aleatorio
+                if (nivel <= 3) tiposDisponibles = ['suma', 'resta'];
+                else tiposDisponibles = ['suma', 'resta', 'multiplicacion', 'division'];
                 const tipoElegido = tiposDisponibles[Math.floor(Math.random() * tiposDisponibles.length)];
                 return generarOperacion(tipoElegido, nivel);
             }
 
             while (intentos < 30) {
-                // Generamos números con cierta aleatoriedad para evitar siempre 0,1,2
-                // Para suma/resta: a entre 0 y maxNum, b entre 0 y maxNum, pero con sesgo a números más grandes a veces
                 let rangoA, rangoB;
-                // Aleatoriamente elegimos si usar números pequeños o grandes
                 const sesgo = Math.random();
                 if (sesgo < 0.3) {
-                    // números pequeños (0-5)
                     rangoA = Math.min(5, maxNum);
                     rangoB = Math.min(5, maxNum);
                 } else if (sesgo < 0.6) {
-                    // números medios (hasta mitad del máximo)
                     rangoA = Math.floor(maxNum * 0.5);
                     rangoB = Math.floor(maxNum * 0.5);
                 } else {
-                    // números grandes (hasta el máximo)
                     rangoA = maxNum;
                     rangoB = maxNum;
                 }
@@ -715,45 +474,38 @@
                         texto = `${a} ${operador} ${b} = ?`;
                         break;
                     case 'resta':
-                        // Aseguramos a >= b
                         a = Math.floor(Math.random() * (rangoA + 1));
-                        b = Math.floor(Math.random() * (a + 1)); // b entre 0 y a
+                        b = Math.floor(Math.random() * (a + 1));
                         resultado = a - b;
                         operador = '−';
                         texto = `${a} ${operador} ${b} = ?`;
                         break;
                     case 'multiplicacion':
-                        // Usamos tablas de multiplicar, pero con números aleatorios hasta maxTabla
-                        const maxTab = maxTabla;
-                        a = Math.floor(Math.random() * maxTab) + 1;
-                        b = Math.floor(Math.random() * maxTab) + 1;
-                        // A veces forzar que sean números más grandes para variedad
+                        a = Math.floor(Math.random() * maxTabla) + 1;
+                        b = Math.floor(Math.random() * maxTabla) + 1;
                         if (Math.random() > 0.7) {
-                            a = Math.floor(Math.random() * (maxTab * 0.5)) + Math.floor(maxTab * 0.5);
-                            b = Math.floor(Math.random() * (maxTab * 0.5)) + Math.floor(maxTab * 0.5);
-                            if (a > maxTab) a = maxTab;
-                            if (b > maxTab) b = maxTab;
+                            a = Math.floor(Math.random() * (maxTabla * 0.5)) + Math.floor(maxTabla * 0.5);
+                            b = Math.floor(Math.random() * (maxTabla * 0.5)) + Math.floor(maxTabla * 0.5);
+                            if (a > maxTabla) a = maxTabla;
+                            if (b > maxTabla) b = maxTabla;
                         }
                         resultado = a * b;
                         operador = '×';
                         texto = `${a} ${operador} ${b} = ?`;
                         break;
                     case 'division':
-                        // División exacta: a = b * c, resultado = c
-                        const maxTabDiv = maxTabla;
-                        b = Math.floor(Math.random() * maxTabDiv) + 1;
-                        let c = Math.floor(Math.random() * maxTabDiv) + 1;
-                        // Variar para que no siempre sean números pequeños
+                        let bDiv = Math.floor(Math.random() * maxTabla) + 1;
+                        let c = Math.floor(Math.random() * maxTabla) + 1;
                         if (Math.random() > 0.6) {
-                            b = Math.floor(Math.random() * (maxTabDiv * 0.5)) + Math.floor(maxTabDiv * 0.5);
-                            c = Math.floor(Math.random() * (maxTabDiv * 0.5)) + Math.floor(maxTabDiv * 0.5);
-                            if (b > maxTabDiv) b = maxTabDiv;
-                            if (c > maxTabDiv) c = maxTabDiv;
+                            bDiv = Math.floor(Math.random() * (maxTabla * 0.5)) + Math.floor(maxTabla * 0.5);
+                            c = Math.floor(Math.random() * (maxTabla * 0.5)) + Math.floor(maxTabla * 0.5);
+                            if (bDiv > maxTabla) bDiv = maxTabla;
+                            if (c > maxTabla) c = maxTabla;
                         }
-                        a = b * c;
+                        a = bDiv * c;
                         resultado = c;
                         operador = '÷';
-                        texto = `${a} ${operador} ${b} = ?`;
+                        texto = `${a} ${operador} ${bDiv} = ?`;
                         break;
                     default:
                         a = Math.floor(Math.random() * 11);
@@ -763,7 +515,6 @@
                         texto = `${a} ${operador} ${b} = ?`;
                 }
 
-                // Evitar repetición consecutiva
                 if (texto !== ultimaOperacionTexto) {
                     nuevaOperacion = { a, b, operador, resultado, texto };
                     break;
@@ -772,7 +523,7 @@
             }
 
             if (!nuevaOperacion) {
-                // Fallback: forzar cambio simple
+                // fallback
                 switch (tipo) {
                     case 'suma':
                         a = (a + 1) % (maxNum + 1);
@@ -799,8 +550,7 @@
                         resultado = c2;
                         texto = `${a} ÷ ${b} = ?`;
                         break;
-                    default:
-                        break;
+                    default: break;
                 }
                 nuevaOperacion = { a, b, operador, resultado, texto };
             }
@@ -809,51 +559,37 @@
             return nuevaOperacion;
         }
 
-        // ---------- GENERAR OPCIONES (sin negativos) ----------
         function generarOpciones(resultado) {
             let opciones = new Set();
             opciones.add(resultado);
-
             let candidatos = [];
             if (resultado === 0) {
                 candidatos = [1, 2, 3, 4, 5];
             } else {
-                // Generar un rango alrededor del resultado, pero sin negativos
                 let base = Math.max(0, resultado - 8);
                 let tope = resultado + 8;
                 for (let i = base; i <= tope; i++) {
                     if (i !== resultado) candidatos.push(i);
                 }
-                // Si hay muy pocos, agregar más
                 while (candidatos.length < 12) {
                     candidatos.push(resultado + candidatos.length + 3);
                 }
             }
-
-            // Mezclar y tomar hasta 3 distintos
             for (let i = candidatos.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [candidatos[i], candidatos[j]] = [candidatos[j], candidatos[i]];
             }
-
             for (let val of candidatos) {
                 if (opciones.size >= 3) break;
-                if (val >= 0 && !opciones.has(val)) {
-                    opciones.add(val);
-                }
+                if (val >= 0 && !opciones.has(val)) opciones.add(val);
             }
-
-            // Rellenar si faltan
             let extra = 1;
             while (opciones.size < 3) {
                 let cand = resultado + extra;
                 if (cand < 0) cand = resultado + extra + 10;
-                if (!opciones.has(cand) && cand >= 0) {
-                    opciones.add(cand);
-                }
+                if (!opciones.has(cand) && cand >= 0) opciones.add(cand);
                 extra++;
             }
-
             let arr = Array.from(opciones);
             for (let i = arr.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -862,7 +598,6 @@
             return arr;
         }
 
-        // ---------- ACTUALIZAR OPCIONES ----------
         function actualizarOpciones(opcionesArray) {
             const botones = opcionesDiv.querySelectorAll('.opcion-boton');
             botones.forEach((btn, idx) => {
@@ -873,23 +608,18 @@
             });
         }
 
-        // ---------- RENDERIZAR CAMINO ----------
         function renderizarCamino() {
             caminoDiv.innerHTML = '';
             for (let i = 0; i < TOTAL_PASOS; i++) {
                 const casilla = document.createElement('div');
                 casilla.className = 'casilla';
                 casilla.textContent = i + 1;
-                if (i < pasoActual) {
-                    casilla.classList.add('completada');
-                } else if (i === pasoActual) {
-                    casilla.classList.add('actual');
-                }
+                if (i < pasoActual) casilla.classList.add('completada');
+                else if (i === pasoActual) casilla.classList.add('actual');
                 caminoDiv.appendChild(casilla);
             }
         }
 
-        // ---------- ACTUALIZAR BARRA SUPERIOR ----------
         function actualizarBarra() {
             puntosDisplay.textContent = puntos;
             golosinasDisplay.textContent = golosinas;
@@ -897,7 +627,6 @@
             nivelDisplay.textContent = nivel;
         }
 
-        // ---------- MOSTRAR MENSAJE ----------
         function mostrarMensaje(texto, tipoMensaje) {
             mensajeDiv.textContent = texto;
             mensajeDiv.className = tipoMensaje || '';
@@ -908,9 +637,8 @@
             }, 2500);
         }
 
-        // ---------- CONFETI ----------
         function lanzarConfeti(cantidad = 30) {
-            const colores = ['#f44336', '#e91e63', '#9c27b0', '#3f51b5', '#4caf50', '#ffeb3b', '#ff9800', '#00bcd4'];
+            const colores = ['#f44336','#e91e63','#9c27b0','#3f51b5','#4caf50','#ffeb3b','#ff9800','#00bcd4'];
             for (let i = 0; i < cantidad; i++) {
                 const el = document.createElement('div');
                 el.className = 'confeti';
@@ -926,7 +654,6 @@
             }
         }
 
-        // ---------- ANIMACIÓN GOLOSINA ----------
         function animarGolosina() {
             const el = document.createElement('div');
             el.textContent = '🍬';
@@ -941,12 +668,10 @@
             setTimeout(() => el.remove(), 1200);
         }
 
-        // ---------- MANEJAR RESPUESTA ----------
         function manejarOpcion(e) {
             const btn = e.currentTarget;
             if (!juegoActivo || esperandoRespuesta || btn.disabled) return;
             if (pasoActual >= TOTAL_PASOS) return;
-
             const valor = parseInt(btn.dataset.valor);
             if (isNaN(valor)) return;
 
@@ -955,7 +680,6 @@
             botones.forEach(b => b.disabled = true);
 
             const correcto = (valor === operacionActual.resultado);
-
             if (correcto) {
                 puntos += 10;
                 golosinas += 1;
@@ -963,7 +687,6 @@
                 lanzarConfeti(25);
                 animarGolosina();
                 btn.classList.add('correcto');
-
                 pasoActual++;
                 if (pasoActual >= TOTAL_PASOS) {
                     juegoActivo = false;
@@ -977,7 +700,6 @@
                 }
                 actualizarBarra();
                 renderizarCamino();
-
                 setTimeout(() => {
                     operacionActual = generarOperacion(tipo, nivel);
                     operacionTexto.textContent = operacionActual.texto;
@@ -989,29 +711,18 @@
                 }, 600);
             } else {
                 puntos -= 10;
-                if (golosinas > 0) {
-                    golosinas -= 1;
-                    mostrarMensaje(`❌ Incorrecto. -10 y -🍬`, 'incorrecto');
-                } else {
-                    mostrarMensaje(`❌ Incorrecto. -10`, 'incorrecto');
-                }
+                if (golosinas > 0) { golosinas -= 1; mostrarMensaje('❌ Incorrecto. -10 y -🍬', 'incorrecto'); }
+                else mostrarMensaje('❌ Incorrecto. -10', 'incorrecto');
                 btn.classList.add('incorrecto');
                 botones.forEach(b => {
-                    if (parseInt(b.dataset.valor) === operacionActual.resultado) {
-                        b.classList.add('correcto');
-                    }
+                    if (parseInt(b.dataset.valor) === operacionActual.resultado) b.classList.add('correcto');
                 });
-
                 const casillas = document.querySelectorAll('.casilla');
                 if (casillas[pasoActual]) {
                     casillas[pasoActual].classList.add('fallida');
-                    setTimeout(() => {
-                        casillas[pasoActual].classList.remove('fallida');
-                    }, 500);
+                    setTimeout(() => casillas[pasoActual].classList.remove('fallida'), 500);
                 }
-
                 actualizarBarra();
-
                 if (puntos <= 0) {
                     puntos = 0;
                     actualizarBarra();
@@ -1022,7 +733,6 @@
                     esperandoRespuesta = false;
                     return;
                 }
-
                 setTimeout(() => {
                     operacionActual = generarOperacion(tipo, nivel);
                     operacionTexto.textContent = operacionActual.texto;
@@ -1035,14 +745,12 @@
             }
         }
 
-        // ---------- FINALIZAR JUEGO ----------
         function finalizarJuego(ganado) {
             juego.classList.add('oculto');
             gameover.classList.remove('oculto');
             puntosFinal.textContent = puntos;
             golosinasFinal.textContent = golosinas;
             pasoFinal.textContent = Math.min(pasoActual + 1, TOTAL_PASOS);
-
             if (ganado) {
                 document.querySelector('#gameover h1').textContent = '🎉 ¡VICTORIA!';
                 document.querySelector('#gameover h1').style.color = '#2e7d32';
@@ -1053,34 +761,28 @@
             }
         }
 
-        // ---------- INICIAR JUEGO ----------
         function iniciarJuego() {
             tipo = tipoSelect.value;
             nivel = parseInt(nivelSelect.value);
             if (isNaN(nivel) || nivel < 1) nivel = 1;
             if (nivel > 5) nivel = 5;
-
             puntos = 100;
             golosinas = 0;
             pasoActual = 0;
             juegoActivo = true;
             esperandoRespuesta = false;
             ultimaOperacionTexto = '';
-
             inicio.classList.add('oculto');
             gameover.classList.add('oculto');
             juego.classList.remove('oculto');
-
             renderizarCamino();
             actualizarBarra();
-
             operacionActual = generarOperacion(tipo, nivel);
             operacionTexto.textContent = operacionActual.texto;
             const opciones = generarOpciones(operacionActual.resultado);
             actualizarOpciones(opciones);
             mensajeDiv.textContent = '';
             mensajeDiv.className = '';
-
             const botones = opcionesDiv.querySelectorAll('.opcion-boton');
             botones.forEach(btn => {
                 btn.removeEventListener('click', manejarOpcion);
@@ -1088,7 +790,6 @@
             });
         }
 
-        // ---------- REINICIAR ----------
         function reiniciarJuego() {
             gameover.classList.add('oculto');
             inicio.classList.remove('oculto');
@@ -1098,15 +799,11 @@
             nivelSelect.focus();
         }
 
-        // ---------- EVENTOS ----------
         btnComenzar.addEventListener('click', iniciarJuego);
         btnReiniciar.addEventListener('click', reiniciarJuego);
-
-        // ---------- INICIO ----------
         inicio.classList.remove('oculto');
         juego.classList.add('oculto');
         gameover.classList.add('oculto');
     </script>
-
 </body>
 </html>
